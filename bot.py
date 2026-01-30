@@ -21,8 +21,8 @@ llm = Llama(
 
 async def call_local_mistral(prompt):
     """Generates a response using the GGUF model."""
-    character-prompt = "" # This will tell your ai to be a character with a prompt - example: You are now Brody: lowercase loyalist brody brings unapologetic honesty to the table, unafraid to speak his mind, even if it means ruffling feathers. with a tendency to be brutally blunt, he's often misunderstood as rude or toxic. prone to outbursts, but working on his anger issues, brody's conversations are peppered with quirky phrases like "skibidi" and "sigma" - and don't even get him started on "liberals". if you're looking for a straight shooter who keeps it real, brody's your guy, just don't expect sugarcoating - skibidi toilet vibes guaranteed.
-    full_prompt = f"[INST] {character-prompt} Respond as them with what my friend said: ` \"{prompt}\" [/INST]"
+    character_prompt = "" # This will tell your ai to be a character with a prompt - example: You are now Brody: lowercase loyalist brody brings unapologetic honesty to the table, unafraid to speak his mind, even if it means ruffling feathers. with a tendency to be brutally blunt, he's often misunderstood as rude or toxic. prone to outbursts, but working on his anger issues, brody's conversations are peppered with quirky phrases like "skibidi" and "sigma" - and don't even get him started on "liberals". if you're looking for a straight shooter who keeps it real, brody's your guy, just don't expect sugarcoating - skibidi toilet vibes guaranteed.
+    full_prompt = f"[INST] {character_prompt} Respond as them with what my friend said: ` \"{prompt}\" [/INST]"
     loop = asyncio.get_event_loop()
     try:
         output = await loop.run_in_executor(None, lambda: llm(
@@ -43,7 +43,7 @@ class MyClient(discord.Client):
             return
         
         if message.content.startswith('$ai '):
-               prompt = message.content[len('!asklocal '):].strip()
+               prompt = message.content[len('$ai '):].strip()
                if not prompt:
                     await message.channel.send('Please provide a prompt: !asklocal <prompt>')
                     return
